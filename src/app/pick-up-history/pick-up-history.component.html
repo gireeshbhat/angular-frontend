@@ -1,0 +1,68 @@
+<div [ngBusy]="busy"></div>
+<div style="background: white">
+  <div class="arrow_box2">
+    <div class="notification-body">
+      <p class="ptextedFormat">Pickup where you left off
+      </p>
+
+      <div class="sliderSpace" @easeInOut>
+        <div class="row">
+          <div class="col-sm-3 fleft">
+            <span class="textformattingg custom-select" style="width:100px;">
+              <select class="sortfilter form-control smFormat" #views (change)="eventFilter(views.value)">
+                <option>cases</option>
+                <option>days</option>
+              </select>
+            </span>
+          </div>
+          
+          <div class="col-sm-9 fright">
+            <span class="custom-slider">
+              <div *ngIf="defaultView === 'cases'">
+                <ng5-slider [(value)]="sliderLimitsValue" [options]="sliderLimitsOptions"
+                  (valueChange)="fetchCaseDetails(sliderLimitsValue)"></ng5-slider>
+              </div>
+              <div *ngIf="defaultView === 'days'">
+                <ng5-slider [(value)]="sliderDaysValue" [options]="sliderDaysOptions"
+                  (valueChange)="fetchCaseDetails(sliderDaysValue)"></ng5-slider>
+              </div>
+            </span>
+          </div>
+          
+        </div>
+      </div>
+      <div>
+
+        <div class="timeline">
+
+          <p class="pbodyTextFormt">&nbsp;</p>
+          <perfect-scrollbar class="scroll-body" style="max-height: 480px;">
+            <!-- loop start for event  timeline-->
+            <div class="entry" *ngFor="let action of myActions">
+              <div class="title">
+                <div class="a">
+                  <strong>{{ action.actionTime }}</strong>
+                </div>
+                <div class="b">{{ action.actionDate }}</div>
+              </div>
+              <div class="bodyPickup">
+                <span class="mainmileston">{{ action.message }}</span> <br>
+
+                <div *ngIf="action.actionName == '';
+                       else pointerSpan">
+                  <span class="mainbodymielstn_black">{{ action.number }}</span>
+                </div>
+                <ng-template #pointerSpan>
+                  <span class="mainbodymielstn pointer" (click)="navigateTo(action)">{{action.number}}</span>
+                </ng-template>
+
+              </div>
+            </div>
+          </perfect-scrollbar>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

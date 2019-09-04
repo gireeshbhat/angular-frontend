@@ -1,0 +1,35 @@
+.searchuser { max-width: 166px; margin:0 3px; }
+.edituser  { background: #52d12d;  margin:0 3px; border-color: #52d12d;}
+.deactivateuser  { background: #ff3600; margin:0 3px; border-color: #ff3600; }
+.adduser  { background: #007CB9; margin:0 3px;  border-color: #007CB9;}
+
+
+.edituser:hover  { background: #77e657;  }
+.deactivateuser:hover  { background: #fe653c; }
+
+/* .adduser:hover  { background: #14e8eb;  } */
+.panel-heading  { font-size: 20px; color:#252e4f; background: #f6f9f9;font-weight: 500;}
+.panel-heading > span  {
+    font-size: 32px;
+display: inline-block;
+vertical-align: middle;
+margin-right: 10px;
+}
+.searchuser .input-group-addon {      background: #fff;
+    border-left: 0;}
+    .searchuser .form-control  { border-right: 0}
+
+:host >>> .ui-toast .ui-toast-message.ui-toast-message-warn {
+ background-color: #fff;
+}
+
+:host >>> .needAction[_ngcontent-c3] > div[_ngcontent-c3]:hover > span[_ngcontent-c3]{
+    color: #007CB9;
+}
+:host >>> .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+    background-color: #007CB9;
+    border-color: #007CB9;
+}
+:host >>> .panel-heading[_ngcontent-c1] > span[_ngcontent-c1]{
+    color: #007CB9;
+}

@@ -1,0 +1,414 @@
+<!-- Screening finding same -->
+<div class="modal-dialog">
+    <div class="modal-content comment-modal">
+        <div class="comment-modal comment_pop">
+            <div class="panel panel-default" style="margin-bottom:0px;">
+
+                <div class="modal-header">
+                    <h4 class="pull-left"><span class="icon_wrap"><i class="icon-team"></i></span> Watchlist </h4>
+                    <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"
+                        (click)="close()">
+                        <img class="mfp-close" src="assets/images/close.png">
+                    </button>
+                </div>
+                <div class="panel-body">
+
+                    <perfect-scrollbar style="max-height: 400px;">
+                        <div class="container">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form>
+                                        <div class="col-sm-12">
+                                            <br>
+                                            <!--first row-->
+                                            <div class="row" *ngIf="watchlistModel.IsIndividual">
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">Last Name <span
+                                                            style="color:red">*</span></label>
+                                                    <input type="text" class="form-control"
+                                                        [(ngModel)]="watchlistModel.LastName" name="LastName" required>
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">First Name <span
+                                                            style="color:red">*</span></label>
+                                                    <input type="text" class="form-control"
+                                                        [(ngModel)]="watchlistModel.FirstName" name="FirstName"
+                                                        required>
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">Middle Name</label>
+                                                    <input type="text" class="form-control"
+                                                        [(ngModel)]="watchlistModel.MiddleName" name="MiddleName">
+                                                </div>
+                                            </div>
+
+                                            <div class="row" *ngIf="!watchlistModel.IsIndividual">
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">Name <span
+                                                            style="color:red">*</span></label>
+                                                    <input type="text" class="form-control"
+                                                        [(ngModel)]="watchlistModel.Name" name="Name">
+                                                </div>
+                                            </div>
+
+                                            <!--2nd row-->
+                                            <div class="row">
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">AKA Name</label>
+                                                    <input type="text" class="form-control"
+                                                        [(ngModel)]="watchlistModel.AkAName" name="AkAName">
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">Status</label><br>
+                                                    <select class="form-control"
+                                                        (change)="onStatusChange($event.target.selectedIndex)">
+                                                        <option *ngFor="let status of statuses; let i = index"
+                                                            [selected]="status === watchlistModel.Status ? true : false">
+                                                            {{ status }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!--3rd row-->
+                                            <div class="row">
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">Phone</label>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="col-sm-9 removeM">
+                                                                <input type="text" name="phoneNumber" maxlength="10"
+                                                                    [(ngModel)]="watchlistModel.Watchlist_PhoneNumber[0].PhoneNumber"
+                                                                    class="form-control">
+                                                            </div>
+                                                            <div class="col-sm-3 removeM">
+                                                                <button class="red" [popover]="PhonePopover"
+                                                                    [disabled]="!watchlistModel.Watchlist_PhoneNumber[0].PhoneNumber">+</button>
+
+
+                                                                <div id="phonePopover">
+                                                                    <popover-content #PhonePopover placement="right"
+                                                                        [closeOnClickOutside]="true">
+                                                                        <label>Phone Number</label>
+                                                                        <img src="assets/images/add.svg"
+                                                                            (click)="addNewPhone()"
+                                                                            style="width: 1rem; height: 1.5rem;" />
+                                                                        <br><br>
+                                                                        <div class="col-lg-12"
+                                                                            *ngFor="let phNo of watchlistModel.Watchlist_PhoneNumber | slice:1; let i = index;"
+                                                                            style="padding-bottom: 1em">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-9">
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        maxlength="10"
+                                                                                        [(ngModel)]="phNo.PhoneNumber"
+                                                                                        name="PhoneNumber{{ i }}"
+                                                                                        style="width: 7rem;">
+                                                                                </div>
+                                                                                <div class="col-sm-3">
+                                                                                    <img src="assets/images/delete.svg"
+                                                                                        (click)="removePhone(i)"
+                                                                                        style="width: 1rem; height: 2rem; padding-top: 0.2rem" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </popover-content>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="col-sm-8 form-group">
+                                                    <label class="textfommmt">Address
+                                                        <hr class="new1">
+                                                        <button class="red" style="position: absolute;
+                                                            margin-left: 80%;
+                                                            margin-top: -27px;" [popover]="addressPopover"
+                                                            [disabled]="!watchlistModel.Address[0].AddressLine1&&!watchlistModel.Address[0].AddressLine2&&!watchlistModel.Address[0].City&&!watchlistModel.Address[0].State&&!watchlistModel.Address[0].ZipCode">+</button>
+
+                                                        <popover-content #addressPopover placement="left"
+                                                            [closeOnClickOutside]="true" style="top:103px; left:160px">
+                                                            <label>Address</label>
+                                                            <img src="assets/images/add.svg" (click)="addNewAddress()"
+                                                                style="width: 1rem; height: 1.5rem;" />
+                                                            <br><br>
+                                                            <div class="col-lg-12"
+                                                                *ngFor="let address of watchlistModel.Address | slice:1; trackBy: trackByFn; let j = index"
+                                                                style="padding-bottom: 1em;">
+                                                                <div class="row">
+                                                                    <div class="col-sm-10">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-4">
+                                                                                <label>Address Line1</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    [(ngModel)]="address.AddressLine1"
+                                                                                    name="address.AddressLine1{{ j }}">
+                                                                            </div>
+
+                                                                            <div class="col-sm-4">
+                                                                                <label>Address Line2</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    [(ngModel)]="address.AddressLine2"
+                                                                                    name="address.AddressLine2{{ j }}">
+                                                                            </div>
+
+                                                                            <div class="col-sm-4">
+                                                                                <label>City </label>
+                                                                                <input type="text" class="form-control"
+                                                                                    [(ngModel)]="address.City"
+                                                                                    name="address.City{{ j }}">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-sm-4">
+                                                                                <label>State </label>
+                                                                                <input type="text" class="form-control"
+                                                                                    [(ngModel)]="address.State"
+                                                                                    name="address.State{{ j }}">
+                                                                            </div>
+
+                                                                            <div class="col-sm-4">
+                                                                                <label>Zip Code</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    [(ngModel)]="address.ZipCode"
+                                                                                    maxlength="10" (keyup)="formatZip(j + 1)"
+                                                                                    name="address.ZipCode{{ j }}">
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        <img src="assets/images/delete.svg"
+                                                                            (click)="removeAddress(j)"
+                                                                            style="width: 1rem; height: 2rem; padding-top: 0.2rem" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </popover-content>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <!--4th row-->
+                                            <div class="row">
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">NPI</label>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="col-sm-9 removeM">
+                                                                <input type="text" name="npi" class="form-control"
+                                                                    maxlength="10"
+                                                                    [(ngModel)]="watchlistModel.Watchlist_NPI[0].Npi">
+                                                            </div>
+                                                            <div class="col-sm-3 removeM">
+                                                                <button class="red" [popover]="NpiPopover"
+                                                                    [disabled]="!watchlistModel.Watchlist_NPI[0].Npi">+</button>
+
+                                                                <div id="npiPopover">
+                                                                    <popover-content #NpiPopover placement="right"
+                                                                        [closeOnClickOutside]="true">
+                                                                        <label>NPI</label>
+                                                                        <img src="assets/images/add.svg"
+                                                                            (click)="addNewNpi()"
+                                                                            style="width: 1rem; height: 1.5rem;" />
+                                                                        <br><br>
+                                                                        <div class="col-lg-12"
+                                                                            *ngFor="let npi of watchlistModel.Watchlist_NPI | slice:1; let i = index;"
+                                                                            style="padding-bottom: 1em">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-9">
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        maxlength="10"
+                                                                                        [(ngModel)]="npi.Npi"
+                                                                                        name="Npi{{ i }}"
+                                                                                        style="width: 7rem;">
+                                                                                </div>
+                                                                                <div class="col-sm-3">
+                                                                                    <img src="assets/images/delete.svg"
+                                                                                        (click)="removeNpi(i)"
+                                                                                        style="width: 1rem; height: 2rem; padding-top: 0.2rem" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </popover-content>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">Address Line1</label>
+                                                    <input type="text" class="form-control"
+                                                        [(ngModel)]="watchlistModel.Address[0].AddressLine1"
+                                                        name="AddressLine1">
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">Address Line2</label>
+                                                    <input type="text" class="form-control"
+                                                        [(ngModel)]="watchlistModel.Address[0].AddressLine2"
+                                                        name="AddressLine2">
+                                                </div>
+                                            </div>
+                                            <!--5th row-->
+                                            <div class="row">
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">Provider Number</label>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="col-sm-9 removeM">
+                                                                <input type="text" name="providerNumber"
+                                                                    [(ngModel)]="watchlistModel.Watchlist_ProviderNo[0].ProviderNo"
+                                                                    class="form-control">
+                                                            </div>
+                                                            <div class="col-sm-3 removeM">
+                                                                <button class="red" [popover]="ProvNoPopover"
+                                                                    [disabled]="!watchlistModel.Watchlist_ProviderNo[0].ProviderNo">+</button>
+
+                                                                <div id="provNoPopover">
+                                                                    <popover-content #ProvNoPopover placement="right"
+                                                                        [closeOnClickOutside]="true">
+                                                                        <label>Provider Number</label>
+                                                                        <img src="assets/images/add.svg"
+                                                                            (click)="addNewProviderNumber()"
+                                                                            style="width: 1rem; height: 1.5rem;" />
+                                                                        <br><br>
+                                                                        <div class="col-lg-12"
+                                                                            *ngFor="let provNo of watchlistModel.Watchlist_ProviderNo | slice:1; let i = index;"
+                                                                            style="padding-bottom: 1em">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-9">
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        [(ngModel)]="provNo.ProviderNo"
+                                                                                        name="Watchlist_ProviderNo{{ i }}"
+                                                                                        style="width: 7rem;">
+                                                                                </div>
+                                                                                <div class="col-sm-3">
+                                                                                    <img src="assets/images/delete.svg"
+                                                                                        (click)="removeProviderNumber(i)"
+                                                                                        style="width: 1rem; height: 2rem; padding-top: 0.2rem" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </popover-content>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">City </label>
+                                                    <input type="text" class="form-control"
+                                                        [(ngModel)]="watchlistModel.Address[0].City" name="City">
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">State </label>
+                                                    <input type="text" class="form-control"
+                                                        [(ngModel)]="watchlistModel.Address[0].State" name="State">
+                                                </div>
+                                            </div>
+                                            <!--6th row-->
+                                            <div class="row">
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">License</label>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="col-sm-9 removeM">
+                                                                <input type="text" name="license" class="form-control"
+                                                                    [(ngModel)]="watchlistModel.Watchlist_License[0].License">
+                                                            </div>
+                                                            <div class="col-sm-3 removeM">
+                                                                <button class="red" [popover]="LicenseNoPopover"
+                                                                    [disabled]="!watchlistModel.Watchlist_License[0].License">+</button>
+
+                                                                <div id="licensePopover">
+                                                                    <popover-content #LicenseNoPopover placement="right"
+                                                                        [closeOnClickOutside]="true">
+                                                                        <label>License Number</label>
+                                                                        <img src="assets/images/add.svg"
+                                                                            (click)="addNewLicenseNo()"
+                                                                            style="width: 1rem; height: 1.5rem;" />
+                                                                        <br><br>
+                                                                        <div class="col-lg-12"
+                                                                            *ngFor="let license of watchlistModel.Watchlist_License | slice:1; let i = index;"
+                                                                            style="padding-bottom: 1em">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-9">
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        [(ngModel)]="license.License"
+                                                                                        name="Watchlist_License{{ i }}"
+                                                                                        style="width: 7rem;">
+                                                                                </div>
+                                                                                <div class="col-sm-3">
+                                                                                    <img src="assets/images/delete.svg"
+                                                                                        (click)="removeLicenseNo(i)"
+                                                                                        style="width: 1rem; height: 2rem; padding-top: 0.2rem" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </popover-content>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">Zip Code </label>
+                                                    <input type="text" class="form-control" maxlength="10" (keyup)="formatZip(0)"
+                                                        [(ngModel)]="watchlistModel.Address[0].ZipCode" name="ZipCode">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-8 form-group">
+                                                    <label class="textfommmt">Notes</label>
+                                                    <textarea rows="3" class="form-control" style="color:#555"
+                                                        [(ngModel)]="watchlistModel.Notes" name="Notes"></textarea>
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">Request by</label>
+                                                    <input type="text" class="form-control"
+                                                        [(ngModel)]="watchlistModel.RequestBy" name="RequestBy">
+                                                </div>
+                                                <div class="col-sm-4 form-group">
+                                                    <label class="textfommmt">Date Added</label>
+                                                    <input type="text" class="form-control"
+                                                        [(ngModel)]="watchlistModel.DateAdded" name="DateAdded">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </perfect-scrollbar>
+                      
+                </div>
+
+                <div class="panelfooter btnFooter enrollment_footer text-center">
+                    <button class="btn btn-default btncancel btn_wrap btn-sm" (click)="cancel(false)"
+                        style="background-color: firebrick; color: white;">Cancel</button>
+
+                    <button class="btn btn-success btnconfirm btn_wrap  btn-sm" *ngIf="watchlistModel.IsIndividual"
+                        [disabled]="!watchlistModel.LastName || !watchlistModel.FirstName ||  disableBtn"
+                        (click)="submitEdit()"
+                        style=" margin-left: 62%; background-color: #007CB9;border-color: #007CB9;">Update</button>
+                    <button class="btn btn-success btnconfirm btn_wrap  btn-sm" *ngIf="!watchlistModel.IsIndividual"
+                        [disabled]="!watchlistModel.Name || disableBtn" (click)="submitEdit()"
+                        style=" margin-left: 62%; background-color: #007CB9; border-color: #007CB9;">Update</button>
+
+                    <span class="mandatory">*Mandatory fields</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

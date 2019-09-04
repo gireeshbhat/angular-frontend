@@ -1,0 +1,30 @@
+.notification {
+    background: transparent;
+    color:#fff;
+    position: relative;
+    font-size: 20px;
+    padding: 0 10px;
+}
+.notification:hover {
+    background: transparent;
+    color: #00CED1;
+}
+.notification .badge {
+    display: block;
+    min-width: 18px;
+    min-height: 18px;
+    padding: 2px;
+    text-align: center;
+    color: #fff;
+    background: #00CED1;
+    border-radius: 100px;
+    position: absolute;
+    top: -10px;
+    left: 17px;
+    font-size: 0.58em;
+    line-height: normal;
+    z-index: 1;
+}
+.searchBoxBodyContent { position: absolute; top:0; right: 0; width: 100%; }
+
+

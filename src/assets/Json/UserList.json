@@ -1,0 +1,45 @@
+[
+    {
+      "Notes": "Exclusion from Medi-Cal effective February 20, 2001 due to exclusion from Medicare",
+      "Watchlist_PhoneNumber": [3456345,3674567],
+      "CreatedDate": "2001-07-03T00:00:00.000Z",
+      "LastModifiedDate": "2001-07-03T00:00:00.000Z",
+      "Watchlist_License": ["345734567\n476357"],
+      "DateAdded": "7/3/2001",
+      "RequestBy": "OLS",
+      "RecordLastActionDate": "2017-01-23T03:48:44.007Z",
+      "CreatedUser": null,
+      "Var_Watchlist_License": [
+        {
+          "License": null
+        }
+      ],
+      "LastActionDate": "2019-03-22T06:27:36.230Z",
+      "Name": "Aquino, Lourdes Anabel",
+      "Var_Watchlist_ProviderNo": [
+        {
+          "ProviderNo": null
+        }
+      ],
+      "Var_Watchlist_Address": [
+        {
+          "AddressID": 31788
+        }
+      ],
+      "Deleted": false,
+      "LastModifiedUser": null,
+      "GateKeeperID": 30998,
+      "Var_Watchlist_PhoneNumber": [
+        {
+          "PhoneNumber": null
+        }
+      ],
+      "Watchlist_Address": ["63 S San Marino Ave, PASADENA, CALIFORNIA, "],
+      "AkAName": "aka: Lourdes, Anabel; aka: Ortis Torres, Lourdes; aka: Torres, Anabel",
+      "Var_Watchlist_NPI": ["3456,3567456"],
+      "Approved": true,
+      "Watchlist_ProviderNo": ["345635,345736"],
+      "Watchlist_NPI": ["3456356,456356"],
+      "index": "watchlistdata"
+    }
+  ]

@@ -1,0 +1,223 @@
+<style>
+    .c_loader {
+        height: 10px;
+        background: #eeeeee;
+        display: block;
+        vertical-align: middle;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: #f6f7f8;
+        background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+        background-size: 800px 104px;
+        position: relative;
+    }
+    
+    .c_loader.box {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .c_loader.circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 360px;
+    }
+    
+    .c_loader.line {
+        min-width: 0px;
+        width: 0px;
+        
+    }
+    
+    @keyframes placeHolderShimmer {
+        0% {
+            background-position: -468px 0
+        }
+        100% {
+            background-position: 468px 0
+        }
+    }
+</style>
+<div class="table-responsive">
+    <table class="table actionshow">
+        <thead>
+            <tr>
+                <th *ngIf="isExpandable" style="width:10px"></th>
+                <th *ngIf="internalNeedActionBox" class="checkbox_sele"></th>
+                <th *ngIf="InternalShowReviewerMapping"></th>
+                <th *ngIf="InternalIsMailBoxTableTD"></th>
+                <ng-template ngFor let-item [ngForOf]="this.internalHeaders" let-i="index">
+                    <th  [ngClass]="item.filterClass" class="{{item.name}}">
+                        <span [ngClass]="{'pointer':item.canSort}" (click)="sort(item)">
+                            {{item.displayName}}
+                            <i *ngIf="item.canSort" class="glyphicon"
+                               [ngClass]="{'glyphicon-sort': column != item.name, 'glyphicon-sort-by-attributes-alt': (column == item.name && !isDesc),
+                                'glyphicon-sort-by-attributes': (column == item.name && isDesc) }"
+                               aria-hidden="true">
+                            </i>
+                        </span>
+                        <span *ngIf="item.canfilter" class="iconmoon icon-funnel filter" (click)="colFilterIndex=colFilterIndex==i?-1:i"></span>
+                        <div *ngIf="colFilterIndex==i" class="fitlerBox">
+                            <div class="filter-header">
+                                <h4 class="pull-left">FILTER</h4>
+                                <button type="button" class="close" (click)="colFilterIndex=-1"><img src="../../assets/images/close.png"></button>
+                            </div>
+                            <div class="filter-body">
+                                <div class="form-group">
+                                    <label for="">{{item.displayName}}</label>
+
+                                    <input class="form-control input-sm" *ngIf="item.filterType!='Range' && item.autoFilterRequired==false && item.dataType!='date'" type="text" [(ngModel)]="item.filterValue" placeholder="Search" />
+                                    <input class="form-control input-sm" *ngIf="item.filterType=='Range' && item.dataType!='number' && item.dataType!='date'" type="text" [(ngModel)]="item.filterMinValue" placeholder="From" />
+                                    <input class="form-control input-sm" *ngIf="item.filterType=='Range' && item.dataType!='number' && item.dataType!='date'" type="text" [(ngModel)]="item.filterMaxValue" placeholder="To" />
+                                    <ng2-completer *ngIf="item.autoFilterRequired" [datasource]="item.autoCompleteDataSource" [(ngModel)]="item.filterValue" [minSearchLength]="3" [clearSelected]="false"></ng2-completer>
+                                    <ion-range-slider *ngIf="item.filterType=='Range' && item.dataType=='number'" type="double" min="0" max="1000" [from]="item.filterMinValue" [to]="item.filterMaxValue" from_shadow="true" to_shadow="true" grid="false" grid_num="10" decorate_both="false"
+                                        keyboard="true" keyboard_step="1" (onFinish)="OnSearchFinish($event,item)">
+                                    </ion-range-slider>
+
+
+                                    <!-- <div class="input-group" *ngIf="item.filterType=='Range' && item.dataType=='date'">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input ng2-datetime-picker class="form-control input-sm" [(ngModel)]="item.filterMinValue" date-format="YYYY-MM-DD" date-only="true" [close-on-select]="true" />
+                                </div>
+
+                                    <div class="input-group" *ngIf="item.filterType=='Range' && item.dataType=='date'">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input ng2-datetime-picker class="form-control input-sm" [(ngModel)]="item.filterMaxValue" date-format="YYYY-MM-DD" date-only="true" [close-on-select]="true" />
+                                    </div>
+
+                                    <div class="input-group" *ngIf="item.filterType!='Range' && item.dataType=='date'">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input ng2-datetime-picker class="form-control input-sm" [(ngModel)]="item.filterValue" date-format="YYYY-MM-DD" date-only="true" [close-on-select]="true" />
+                                    </div> -->
+
+                                </div>
+                                <button class="btn btn-block btn-primary " (click)="doFilter()">Search</button>
+                            </div>
+                        </div>
+                    </th>
+                </ng-template>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-item [ngForOf]="this.pagedItems">
+                <tr>
+                    <!-- <ng-template ngFor let-col [ngForOf]="this.internalHeaders">
+                        <td>{{item[col.name]}}</td>
+                    </ng-template> -->
+
+                    <ng-template ngFor let-col [ngForOf]="this.internalHeaders">
+                            <td *ngIf="ColumnVisibility(col.breakpoints) && col.isCustomized" [ngClass]="{'unread': item.IsRead != undefined ? !item.IsRead : false}">
+                                <span *ngIf="col.name=='UserPhoto'" class='userphoto'>
+                                    <img [src]="'assets/images/'+item[col.name]" onError="this.src='assets/images/user-icon.png'">
+                                </span>
+                                <span *ngIf="col.name=='Status'" class='rsultbox pendingstatus'>{{item[col.name].substring(0, 1)}}</span>
+                                <span *ngIf="col.name=='Level'" class="greenflag icon-symbol-1"></span>
+                                <span *ngIf="col.name=='Milestone'" class="colortex">{{item[col.name]}}</span>
+                                <span *ngIf="col.name=='FromName'" class="subjectFix">{{item[col.name]}}</span>
+                                <span *ngIf="col.name=='Subject'" class="subjectFix">{{item[col.name]}}</span>
+                                <span *ngIf="col.name=='MailTo'" class="subjectFix">{{item[col.name]}}</span>
+                                <span *ngIf="col.name=='MailDate'">{{item[col.name] | date: 'MMMM y'}}</span>
+                                <span *ngIf="col.statusBar" [ngStyle]="{'color': textColor(item[col.name])}">{{item[col.name]}}</span>
+                                <span *ngIf="col.name=='TaxId'">{{item[col.name][0]}}</span>
+    
+                                <div *ngIf="col.name=='DaysRemaining'" class="progress_wrap">
+                                    <div id="example-caption-2" [ngStyle]="{'color':Fun_DaysRemainingColorInCase(item.DaysRemaining,item.TAT),'padding-left': DaysPercentage(item.DaysRemaining,item.TAT) + '%'}">{{item[col.name]}}</div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'background-color':Fun_DaysRemainingColorInCase(item.DaysRemaining,item.TAT),'width':DaysPercentage(item.DaysRemaining,item.TAT) + '%'}"></div>
+                                    </div>
+                                </div>
+                                <!-- Adding a generic attachment column, below code need to be or can be removed by doing minor changes accordingly -->
+                                <!-- For Single Attachment -->
+                                <div *ngIf="col.isAttachment" class="btns_wrap">
+                                    <a target="_blank" (click)="openAttachment(item[col.name])"><i [ngClass]="GetAttachmentImageIcon(item[col.name])" aria-hidden="true"></i> </a>
+                                </div>
+                                <!-- For Multiple Attachment -->
+                                <div *ngIf="col.isMultipleAttachments" class="btns_wrap">
+                                    <a target="_blank" (click)="openAttachment(itemAtt)" *ngFor="let itemAtt of item[col.name]"> <i [ngClass]="GetAttachmentImageIcon(itemAtt)" aria-hidden="true"></i> </a>
+                                </div>
+    
+                                <!--Finding columns start-->
+                                <div *ngIf="col.name=='Attachments'" class="btns_wrap">
+                                    <a target="_blank" (click)="openAttachment(itemAtt)" *ngFor="let itemAtt of item.Attachments"> <i [ngClass]="GetAttachmentImageIcon(itemAtt)" aria-hidden="true"></i> </a>
+                                </div>
+                                <!--Finding columns end-->
+                                <!--Attachment columns start-->
+                                <div *ngIf="col.name=='Attachment'" class="btns_wrap">
+                                    <a href="" *ngFor="let itemAtt of item.Attachment"> <i [ngClass]="GetAttachmentImageIcon(itemAtt)" aria-hidden="true"></i> </a>
+                                </div>
+    
+                                <div *ngIf="col.name=='docType'" class="btns_wrap">
+                                    <a href="javascript:void(0)"><i [ngClass]="GetAttachmentImageIcon(item.docType)" aria-hidden="true"></i> </a>
+                                </div>
+                                <div *ngIf="col.name=='AttachCount'" class="attachcount">
+                                    <span class="tb_item"><span class="badge ng-binding">{{item[col.name]}}</span><i class="flaticon flaticon-clip"></i></span>
+                                </div>
+                                <div *ngIf="col.name=='Action'" class="needAction">
+                                    <div  >
+                                        <span class="fa fa-ellipsis-h" (mouseover)="getPosition($event);currentItem=item"></span>                                   
+                                    </div>
+                                </div>                            
+    
+                                <div *ngIf="col.name=='MailAttachments' && item[col.name] != undefined && item[col.name].length > 0 && item[col.name][0] != undefined" class="attachcount">
+                                    <span class="tb_item"><span class="badge ng-binding"></span><i class="flaticon flaticon-clip"></i></span>
+                                </div>
+    
+                                <!--Finding columns start-->
+                            </td>
+                            <td *ngIf="col.wrapClass!=undefined && col.wrapClass!=null && col.wrapClass!='' && ColumnVisibility(col.breakpoints) && !col.isCustomized"><span class="{{col.wrapClass}}">{{item[col.name]}}</span></td>
+                            <td *ngIf="ColumnVisibility(col.breakpoints) && !col.isCustomized && col.wrapClass==undefined">
+                                <a style="cursor:pointer" (click)="AnchorColumn_Clicked(item,i,col.name,$event)" *ngIf="checkAnchorColumn(col.name)" [innerHTML]="item[col.name] | highlights : highlightKeyword"></a>
+                                <!-- <ng-template #noAnchor></ng-template> -->
+                                <span *ngIf="col.name ==='Notes'" class="note_width" title="{{item[col.name]}}">{{item[col.name]}}</span>
+                                <div *ngIf="!checkAnchorColumn(col.name) && col.name !=='Notes'" [innerHTML]="item[col.name] | highlights : highlightKeyword"></div>
+                            </td>
+                        </ng-template>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <!-- pager -->
+</div>
+<div *ngIf="internalDataPaging" class="VDtable_footer">
+    <div class="row">
+        <div class="col-sm-4">
+            <span class="label label-default">Page {{pager.currentPage}} of {{pager.totalPages}}, Total Records - {{pager.totalItems}}</span>
+        </div>
+        <div class="col-sm-8 text-right">
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                <li [ngClass]="{disabled:pager.currentPage === 1}" class="first">
+                    <a (click)="UpdatePagination(1)">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === 1}" class="previous">
+                    <a (click)="UpdatePagination(pager.currentPage - 1)">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="numbers">
+                    <a (click)="UpdatePagination(page)">{{page}}</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage >= pager.totalPages}" class="next">
+                    <a (click)="UpdatePagination(pager.currentPage + 1)">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage >= pager.totalPages}" class="last">
+                    <a (click)="UpdatePagination(pager.totalPages)">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<ul class="optionbox" (mouseleave)="currentItem=null" [style.left.px]="leftposition" [style.top.px]="topposition" *ngIf="currentItem">
+    <li (click)="ActionEnter(currentItem,i,'Edit',$event)" ><span class="icon-edit" ></span> Edit</li>
+    <li (click)="ActionEnter(currentItem,i,'Deactivate',$event)"><span class="icon-remove-user"></span> Delete</li>
+</ul>

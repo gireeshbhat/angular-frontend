@@ -1,0 +1,20 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "module": "es2015",
+	  "allowJs": true,
+    "baseUrl": "",
+    "types": []
+  },
+  "include": [
+    "../src/*",
+    "./app/_models/internalusedata.ts",
+    "../node_modules/ng2draggable/draggable.directive.ts",
+    "./app/admin/admin.module.ts"
+  ],
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
+}

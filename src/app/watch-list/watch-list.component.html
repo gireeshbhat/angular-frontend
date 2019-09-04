@@ -1,0 +1,63 @@
+<div [ngBusy]="busy"></div>
+
+<p-toast position="center" key="c" [modal]="true" [baseZIndex]="99999">
+
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center;    font-size: 14px;">
+      <i class="pi pi-exclamation-triangle" style="font-size: 3em; color: firebrick"></i>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <button type="button" (click)="onConfirm(message.data)" class="btn btn-primary btn-block"
+          style="background-color: #007CB9">Yes</button>
+      </div>
+      <div class="col-xs-6">
+        <button type="button" (click)="onReject(message.data)" class="btn btn-danger btn-block">No</button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+
+<p-toast [style]="{marginTop: '80px'}" [baseZIndex]="99999"></p-toast>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><span class="icon-checked-files"></span>Watchlist
+
+    <div class="pull-right">
+      <button class="btn btn-primary pull-right adduser" (click)="adduser()"><span class="icon-add-user"></span>
+        Add Providers</button>
+      <div class="input-group pull-right searchuser">
+        <input type="text" class="form-control" placeholder="Search" (keyup.enter)="filterItem(myInput.value)" #myInput
+          [(ngModel)]="searchtext">
+        <span class="input-group-addon" id="basic-addon2" (click)="filterItem(myInput.value)"
+          onMouseOver="this.style.cursor='pointer'">
+          <span class="fa icomoon icon-magnifying-glass"></span>
+        </span>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  
+  <div class="panel-body dhtable">
+    <ng-table
+        [data]="filteredItems"
+        [total]="totalRecordCount"
+        [page] = "currentSearchPage"
+        [headers]="adminColumns"
+        [dataPaging]="isPagination"
+        [pageSize]="pageSize"
+        [needActionBox]="false"
+        [IsExpandedMode]="IsExpandedMode"
+        [childTableClass]="childTableClass"
+        [childRowClass]="childTableRowClass"
+        [globalFilter]="globalFilterAssigned"
+        (actionClicked)="actionClicked($event)"
+        (updatePagination)="updatePaginationClick($event)">
+      </ng-table>
+      <!-- [updatePagination]="updatePaginationClick($event)" -->
+  </div>
+
+</div>

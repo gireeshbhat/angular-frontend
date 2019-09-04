@@ -1,0 +1,53 @@
+<!-- main app container -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- Start Main Loader Screen -->
+        <div id="loader">
+            <div class="loader">
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--dot"></div>
+                <div class="loader--text"></div>
+            </div>
+        </div>
+        <!-- End Main Loader Screen -->
+        <div class="wrapper" style="background-color: white">
+            <div class="main">
+                <!-- <header class="navbar-fixed-top">
+                    <nav class="navbar navbar-primary">
+                        <div class="container-fluid">
+
+                            <div class="collapse navbar-collapse" id="nav-main">
+                                <!-- Start Header Links -->
+                                <!-- <ul class="nav navbar-nav mainmenu">
+                                    <li *ngFor="let menu of menus" routerLinkActive="active">
+                                        <a routerLink="{{menu.Pageurl}}">
+                                            <i class="{{menu.Imgclass}}"></i>
+                                            <span>{{menu.LinkText}}</span>
+                                        </a>
+                                    </li>
+                                </ul> -->
+                                <!-- End Header Links -->
+                            <!-- </div> -->
+                            <!-- Start Login Links -->
+                            <!-- <ul class="nav navbar-nav navbar-right logsect">
+                                
+                            </ul> -->
+                            <!-- End Login Links -->
+                            <!-- /.navbar-collapse -->
+                        <!-- </div> -->
+                        <!-- /.container-fluid -->
+                    <!-- </nav> -->
+                <!-- </header> --> 
+                <!--<toaster-container toaster-options="{'time-out': 3000,'position-class': 'toast-top-center','close-button': true}"></toaster-container>-->
+                <!-- Start Pages Views  -->
+                <router-outlet></router-outlet>
+                <!-- End Pages Views  -->
+            </div>
+        </div>
+        <div class="overlay"></div>
+    </div>
+</div>

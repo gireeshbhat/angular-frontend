@@ -1,0 +1,75 @@
+﻿	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 23/11/2016 14:03
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("./fonts/Flaticon.eot");
+  src: url("./fonts/Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./fonts/Flaticon.woff") format("woff"),
+       url("./fonts/Flaticon.ttf") format("truetype"),
+       url("./fonts/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./fonts/Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+  font-size: inherit;
+  font-style: normal;
+}
+
+.flaticon-arrow:before { content: "\f100"; }
+.flaticon-arrows:before { content: "\f101"; }
+.flaticon-bible:before { content: "\f102"; }
+.flaticon-black:before { content: "\f103"; }
+.flaticon-buildings:before { content: "\f104"; }
+.flaticon-calendar:before { content: "\f105"; }
+.flaticon-check:before { content: "\f106"; }
+.flaticon-check-1:before { content: "\f107"; }
+.flaticon-chevron-arrow-down:before { content: "\f108"; }
+.flaticon-clip:before { content: "\f109"; }
+.flaticon-close-cross:before { content: "\f10a"; }
+.flaticon-coins:before { content: "\f10b"; }
+.flaticon-court:before { content: "\f10c"; }
+.flaticon-drop-down-arrow:before { content: "\f10d"; }
+.flaticon-error-triangle:before { content: "\f10e"; }
+.flaticon-giftbox:before { content: "\f10f"; }
+.flaticon-heart-insurance:before { content: "\f110"; }
+.flaticon-home:before { content: "\f111"; }
+.flaticon-house:before { content: "\f112"; }
+.flaticon-interface:before { content: "\f113"; }
+.flaticon-interface-1:before { content: "\f114"; }
+.flaticon-list-with-one-cross:before { content: "\f115"; }
+.flaticon-logout:before { content: "\f116"; }
+.flaticon-medic-suitcase:before { content: "\f117"; }
+.flaticon-money:before { content: "\f118"; }
+.flaticon-money-1:before { content: "\f119"; }
+.flaticon-money-bag:before { content: "\f11a"; }
+.flaticon-money-bag-1:before { content: "\f11b"; }
+.flaticon-music:before { content: "\f11c"; }
+.flaticon-next:before { content: "\f11d"; }
+.flaticon-pen:before { content: "\f11e"; }
+.flaticon-printer:before { content: "\f11f"; }
+.flaticon-prison:before { content: "\f120"; }
+.flaticon-profile:before { content: "\f121"; }
+.flaticon-scales-of-justice:before { content: "\f122"; }
+.flaticon-shapes:before { content: "\f123"; }
+.flaticon-symbol:before { content: "\f124"; }
+.flaticon-symbol-1:before { content: "\f125"; }
+.flaticon-tool:before { content: "\f126"; }
+.flaticon-tools:before { content: "\f127"; }
+.flaticon-tools-1:before { content: "\f128"; }
+.flaticon-university-with-a-flag:before { content: "\f129"; }
+.flaticon-volkswagen-car-side-view:before { content: "\f12a"; }
+.flaticon-wrench:before { content: "\f12b"; }
+.flaticon-mark:before { content: "\f130"; }

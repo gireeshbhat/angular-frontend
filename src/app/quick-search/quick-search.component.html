@@ -1,0 +1,88 @@
+<div style="font-family: Verdana; color: black; font-size: 12px">
+
+  <div class="header">
+    <div>
+      <span> Keyword: <input type="text" value="{{ searchText }}" disabled /></span>
+    </div>
+    <div>
+      <span>Search Results: <span style="color: red">{{ searchMessage }}</span></span>
+      <span class="pagination-footer">Showing {{ request.start + 1 }} - {{ (request.start + 11 ) > totalRecords ? totalRecords : (request.start + 10) }} of {{ totalRecords }} records for
+        '{{ searchText }}' ({{ timeTaken }} ms)</span>
+    </div>
+  </div>
+
+  <table>
+    <tr *ngFor="let item of tableData">
+        <!-- Account Result row -->
+        <td *ngIf="item.isAccount">Account# <a (click)="accountNumberClick(item.accountNumber)"><u>{{ item.accountNumber }}</u></a> [<b>Enrollment Status</b> : {{ item.accountStatus }}; <b>Provider Name</b> :
+          {{ item.provName }}; <b>Provider Type</b> : {{ item.provType }}]
+          <div *ngIf="item.attachment.length !== 0">
+            <a style="padding-left: 15px;" data-toggle="collapse" [attr.data-target]="'#doc' + item.accountNumber">{{ item.attachment.length }} Document(s) found</a>
+            <div id="doc{{ item.accountNumber }}" class="collapse">
+                <ul style="padding-left: 30px; list-style-type:none;">
+                  <li *ngFor="let attachment of item.attachment"><b>Document # : </b>{{ attachment.docnumber }}; <b>FileName :</b> {{ attachment.name }}</li>
+                </ul>
+            </div>
+          </div>
+          <div *ngIf="item.note.length !== 0">
+              <a style="padding-left: 15px;" data-toggle="collapse" [attr.data-target]="'#note' + item.accountNumber">{{ item.note.length }} Note(s) found</a>
+              <div id="note{{ item.accountNumber }}" class="collapse">
+                  <ul style="padding-left: 30px; list-style-type:none;">
+                    <li *ngFor="let note of item.note"><b>Note # : </b>{{ note.notesnumber }}; <b>Note Title :</b> {{ note.name }}; <b>Content :</b> {{ note.content }} </li>
+                  </ul>
+              </div>
+            </div>
+        
+        </td>
+      
+        <!-- Application Result row -->
+        <td *ngIf="item.isApplication">Application# <a (click)="applicationNumberClick(item.appNumber)"><u>{{ item.appNumber }}</u></a> [<b>Provider Name</b> : {{ item.provName }}; <b>Application Type</b> : {{ item.appType }}; <b>Screening Level</b> : {{ item.screeningLevel }}; <b>Milestone</b> : {{ item.mileStone }}]
+        <div *ngIf="item.attachment.length !== 0">
+          <a style="padding-left: 15px;" data-toggle="collapse" [attr.data-target]="'#doc' + item.appNumber">{{ item.attachment.length }} Document(s) found</a>
+          <div id="doc{{ item.appNumber }}" class="collapse">
+              <ul style="padding-left: 30px; list-style-type:none;">
+                <li *ngFor="let attachment of item.attachment"><b>Document # : </b>{{ attachment.docnumber }}; <b>FileName :</b> {{ attachment.name }}</li>
+              </ul>
+          </div>
+        </div>
+        <div *ngIf="item.note.length !== 0">
+            <a style="padding-left: 15px;" data-toggle="collapse" [attr.data-target]="'#note' + item.appNumber">{{ item.note.length }} Note(s) found</a>
+            <div id="note{{ item.appNumber }}" class="collapse">
+                <ul style="padding-left: 30px; list-style-type:none;">
+                  <li *ngFor="let note of item.note"><b>Note # : </b>{{ note.notesnumber }}; <b>Note Title :</b> {{ note.name }}; <b>Content :</b> {{ note.content }} </li>
+                </ul>
+            </div>
+          </div>
+      </td>
+
+      <!-- Alert Result row -->
+      <td *ngIf="item.isAlert">Alert# <a (click)="alertNumberClick(item.alertNumber)"><u>{{ item.alertNumber }}</u></a> [<b>Party Name</b> : {{ item.partyName }}; <b>Watchlist/Category</b> : {{ item.watchlistName }}; <b>Relevance</b> : {{ item.relevance }}; <b>Status</b> : {{ item.status }}; ]
+        <div *ngIf="item.attachment.length !== 0">
+          <a style="padding-left: 15px;" data-toggle="collapse" [attr.data-target]="'#doc' + item.alertNumber">{{ item.attachment.length }} Document(s) found</a>
+          <div id="doc{{ item.alertNumber }}" class="collapse">
+              <ul style="padding-left: 30px; list-style-type:none;">
+                <li *ngFor="let attachment of item.attachment"><b>Document # : </b>{{ attachment.docnumber }}; <b>FileName :</b> {{ attachment.name }}</li>
+              </ul>
+          </div>
+        </div>
+        <div *ngIf="item.note.length !== 0">
+            <a style="padding-left: 15px;" data-toggle="collapse" [attr.data-target]="'#note' + item.alertNumber">{{ item.note.length }} Note(s) found</a>
+            <div id="note{{ item.alertNumber }}" class="collapse">
+                <ul style="padding-left: 30px; list-style-type:none;">
+                  <li *ngFor="let note of item.note"><b>Note # : </b>{{ note.notesnumber }}; <b>Note Title :</b> {{ note.name }}; <b>Content :</b> {{ note.content }} </li>
+                </ul>
+            </div>
+          </div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="pagination-footer">
+    <a class="{{ prevClass }}" (click)="previousPage()">Previous</a>
+    <span *ngIf="currentPage != 0" class="pagination-page">{{ currentPage }}</span>
+    <a class="{{ nextClass }}" (click)="nextPage()">Next</a>
+  </div>
+
+
+
+</div>

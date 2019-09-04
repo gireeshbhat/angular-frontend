@@ -1,0 +1,103 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "digital-harbor-app"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [        
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/slick-carousel/slick/slick.css",
+        "../node_modules/slick-carousel/slick/slick-theme.css",
+        "../node_modules/ion-rangeslider/css/ion.rangeSlider.css",
+        "../node_modules/ion-rangeslider/css/ion.rangeSlider.skinHTML5.css",
+        "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+        "assets/app.css",
+        "assets/css/icomoon/style.css",
+        "assets/css/flaticon.css",
+        "assets/css/animate.css",
+        "assets/css/Plugins/fancybox/jquery.fancybox.css",
+        "assets/css/Plugins/bootstrap-datepicker/bootstrap-datepicker.min.css",
+        "assets/css/Plugins/select2/select2.css",
+        "assets/css/Plugins/perfect-scrollbar/perfect-scrollbar.min.css",
+        "assets/css/Plugins/footable-bootstrap/footable.bootstrap.min.css",
+        "assets/css/Plugins/toaster/toaster.min.css",
+        "assets/css/Plugins/ng-tags-input/ng-tags-input.min.css",
+        "assets/css/Plugins/ng-tags-input/ng-tags-input.bootstrap.min.css",
+        "../node_modules/@ng-select/ng-select/themes/default.theme.css",
+        "../node_modules/ngx-draggable-widget/NgDraggableWidget.css",
+        "../node_modules/primeicons/primeicons.css",
+        "../node_modules/font-awesome/css/font-awesome.css",
+        "../node_modules/primeng/resources/themes/nova-light/theme.css",
+        "../node_modules/primeng/resources/primeng.min.css",
+        "../node_modules/ng-busy/src/style/busy.css",
+        "assets/css/layout.css",
+        "assets/css/kyp.css",
+        "assets/css/kyp-pave2.css",
+        "styles.css"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "../node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
+        "../node_modules/moment/moment.js",
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/slick-carousel/slick/slick.min.js",        
+        "assets/js/Plugins/perfect-scrollbar/perfect-scrollbar.jquery.min.js",
+        "assets/js/Plugins/fancybox/jquery.fancybox.js",      
+        "assets/js/custom.js",
+        "assets/footable.js",
+        "assets/zingchart.min.js",
+        "../node_modules/text-to-svg/build/src/index.js"
+     
+
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "sit": "environments/environment.sit.ts",
+        "uat": "environments/environment.uat.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json"
+    },
+    {
+      "project": "src/tsconfig.spec.json"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": { }
+  }
+}

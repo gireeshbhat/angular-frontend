@@ -1,0 +1,148 @@
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+/* ==========================================
+Single-colored icons can be modified like so:
+.icon-name {
+  font-size: 32px;
+  color: red;
+}
+========================================== */
+
+.icon-Doctor {
+  width: 1.0009765625em;
+}
+
+.icon-Server-External {
+  width: 1.203125em;
+}
+
+.icon-cheque {
+  width: 1.7822265625em;
+}
+
+.icon-efund {
+  width: 1.1142578125em;
+}
+
+.icon-moca1 {
+  width: 1.1357421875em;
+}
+
+.icon-affiliaction1 {
+  width: 1.1357421875em;
+}
+
+.icon-advers {
+  width: 0.7529296875em;
+}
+
+.icon-affiliaction {
+  width: 1.791015625em;
+}
+
+.icon-affiliation {
+  width: 1.4482421875em;
+}
+
+.icon-business {
+  width: 1.4482421875em;
+}
+
+.icon-deligate {
+  width: 1.1103515625em;
+}
+
+.icon-document {
+  width: 1.05859375em;
+}
+
+.icon-investigation {
+  width: 1.00390625em;
+}
+
+.icon-mcsis {
+  width: 1.3837890625em;
+}
+
+.icon-misc {
+  width: 1.2958984375em;
+}
+
+.icon-moca {
+  width: 1.7822265625em;
+}
+
+.icon-npi {
+  width: 0.818359375em;
+}
+
+.icon-payment {
+  width: 0.9892578125em;
+}
+
+.icon-practice {
+  width: 1.1025390625em;
+}
+
+.icon-profile2 {
+  width: 0.826171875em;
+}
+
+.icon-providerreturn {
+  width: 1.0029296875em;
+}
+
+.icon-ssa {
+  width: 1.0439453125em;
+}
+
+.icon-Subcontractors {
+  width: 0.8359375em;
+}
+
+.icon-attch {
+  width: 0.80859375em;
+}
+
+.icon-affi-small {
+  width: 1.1103515625em;
+}
+
+.icon-s_tab3 {
+  width: 0.7314453125em;
+}
+
+.icon-s_tab6 {
+  width: 0.8212890625em;
+}
+
+.icon-s_tab7 {
+  width: 1.1103515625em;
+}
+
+.icon-s_tab10 {
+  width: 1.427734375em;
+}
+
+.icon-s_tab11 {
+  width: 0.7998046875em;
+}
+
+.icon-s_tab12 {
+  width: 1.25em;
+}
+
+.icon-s_tab2 {
+  width: 1.25em;
+}
+
+.icon-image2vector-5 {
+  width: 0.810546875em;
+}

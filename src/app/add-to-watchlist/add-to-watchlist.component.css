@@ -1,0 +1,93 @@
+
+.red{
+  color: white;
+  width: 30px;
+  background-color: #007CB9;
+  height: 30px;
+  margin-top: 2px;
+  border-radius: 5px;
+  border: none;
+  margin-left: 5px;
+}
+.center{
+  text-align: center
+}
+.wrapper {
+  text-align: right;
+  margin-top: 11px;
+  margin-bottom: 12px;
+}
+.button{
+  height: 40px;
+}
+.removeM{
+  margin: 0px;
+padding: 0px;
+}
+
+
+.modal-dialog {
+  width: 1000px;}
+  .container {
+      width: 765px;
+  }
+
+  .textfommmt{
+      font-size: 13px;
+      font-weight: 500;
+  }
+  .centerrrr{
+      margin-bottom: 11px;
+      margin-right: 36px;
+  }
+  .panel-body{
+  background:white;
+  padding: 0px;
+  }
+  .colorHead{
+      color: white;
+      background: #252e4f;
+      width: 100%;
+      margin: 0px;
+  }
+
+  .enrollment_footer .btn_wrap.btn {
+      padding: 6px 10px;
+      font-size: 16px;
+  }
+
+  .btncancel{
+      float: right;
+  }
+  .new1{
+      border: .9px solid darkgray;
+      position: absolute;
+      width: 313px;
+      margin-top: -11px;
+      margin-left: 63px;
+  }
+
+  :host >>> .popover {
+   max-width: 104%;
+   width:825px;
+   
+ }
+ 
+ :host >>> .colorHead[_ngcontent-c7]{
+  background: #007CB9;
+ }
+
+ :host >>> .comment-modal .modal-header h4 .icon_wrap i{
+  color: #007CB9;
+ }
+ :host >>> .btn btn-default btncancel btn_wrap btn-sm{
+   background-color: red;
+ }
+  :host >>> .panelfooter .btn.btn-default{
+  color: white;
+ }
+
+button:disabled,
+button[disabled]{
+  background-color: #55b1db;
+}
